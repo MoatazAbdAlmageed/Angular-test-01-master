@@ -1,0 +1,154 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a simple API",
+    "version": "1.0.0",
+    "title": "Simple Inventory API",
+    "contact": {
+      "email": "hussam.radwan@ibm.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/todos": {
+      "get": {
+        "tags": ["developers"],
+        "summary": "get all todos",
+        "operationId": "getAllTodos",
+        "description": "gets all todos\n",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "get all todos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todo": {
+      "post": {
+        "tags": ["developers"],
+        "summary": "Add Todo",
+        "operationId": "addTodo",
+        "description": "add todo\n",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get all todos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["developers"],
+        "summary": "mod Todo",
+        "operationId": "modTodo",
+        "description": "update todo\n",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get all todos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["developers"],
+        "summary": "remove Todo",
+        "operationId": "delTodo",
+        "description": "remove todo\n",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get all todos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "required": ["todo"],
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "todo": {
+          "type": "string",
+          "example": "My First todo"
+        },
+        "date": {
+          "type": "string",
+          "example": "2019-09-19T16:22:14.870Z"
+        }
+      }
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/todoApp",
+  "schemes": ["http"]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "angular-challenge",
+  "version": "1.0.0",
+  "description": "npm i -g typescript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.5",
+    "@types/swagger-ui-express": "^3.0.1",
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}
