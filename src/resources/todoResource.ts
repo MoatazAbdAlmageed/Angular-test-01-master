@@ -11,7 +11,29 @@ export class TodoResource {
   public todoList: Array<TodoModel>;
 
   constructor(private contextRoot:string,private exp: Application) {
-    this.todoList = new Array();
+    this.todoList = [
+        {
+            id:1,
+            todo:'IBM Interview',
+            date:new Date()
+        },{
+            id:2,
+            todo:'Task 2',
+            date:new Date()
+        },{
+            id:3,
+            todo:'Task 3',
+            date:new Date()
+        },{
+            id:4,
+            todo:'Task 4',
+            date:new Date()
+        },{
+            id:5,
+            todo:'Task 5',
+            date:new Date()
+        },
+    ];
     this.initEndPoints(contextRoot,exp);
   }
 
