@@ -38,6 +38,12 @@ export class TodoResource {
             completed:false,
             date:new Date()
         },
+        {
+            id:6,
+            todo:'GO to work',
+            completed:false,
+            date:new Date()
+        }
     ];
     this.initEndPoints(contextRoot,exp);
   }
@@ -65,7 +71,7 @@ export class TodoResource {
   }
 
   addTodo(todoList: TodoModel[], todoModel: TodoModel,index:number) {
-    todoModel.id = index++;
+    todoModel.id = todoList.length + 1
     todoModel.date = new Date();
     todoList.push(todoModel);
     return todoList;

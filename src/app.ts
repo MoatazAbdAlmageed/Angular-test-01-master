@@ -13,11 +13,13 @@ exp.use((req:Request,res:Response,next:NextFunction)=>{
     res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Headers","*");
     res.header("Access-Control-Allow-Methods","OPTIONS,POST,DELETE,PATCH,GET");
-    if('OPTIONS'===req.method){
-        res.status(200);
-    }else{
-        next();
-    }
+    console.log(req.method);
+    // if('OPTIONS'===req.method){
+    //     res.status(200);
+    // }else{
+    //     next();
+    // }
+    next();
 })
 
 new TodoResource(config.contextRoot,exp);
