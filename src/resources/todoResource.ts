@@ -5,46 +5,14 @@ import {
   NextFunction
 } from "express";
 import { TodoModel } from "../model/todoModel";
+import { todos } from "./todos";
 
 export class TodoResource {
   public index: number = 1;
   public todoList: Array<TodoModel>;
 
   constructor(private contextRoot:string,private exp: Application) {
-    this.todoList = [
-        {
-            id:1,
-            todo:'IBM Interview',
-            completed:true,
-            date:new Date()
-        },{
-            id:2,
-            todo:'Task 2',
-            completed:false,
-            date:new Date()
-        },{
-            id:3,
-            todo:'Task 3',
-            completed:false,
-            date:new Date()
-        },{
-            id:4,
-            todo:'Task 4',
-            completed:false,
-            date:new Date()
-        },{
-            id:5,
-            todo:'Task 5',
-            completed:false,
-            date:new Date()
-        },
-        {
-            id:6,
-            todo:'GO to work',
-            completed:false,
-            date:new Date()
-        }
-    ];
+    this.todoList = todos;
     this.initEndPoints(contextRoot,exp);
   }
 
@@ -56,12 +24,12 @@ export class TodoResource {
       this.todoList = this.addTodo(this.todoList, req.body,this.index++);
       res.send(this.todoList);
     });
-    exp.patch(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {
+    exp.patch(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {/*  */
       this.todoList = this.updateTodo(this.todoList, req.body);
       res.send(this.todoList);
     });
-    exp.delete(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {
-      this.todoList = this.removeTodo(this.todoList, req.body);
+    exp.delete(`/${contextRoot}/todo/:id`, (req: Request, res: Response, next: NextFunction) => {
+      this.todoList = this.removeTodo(this.todoList, req.params.id);
       res.send(this.todoList);
     });
   }
@@ -87,8 +55,8 @@ export class TodoResource {
     return todoList;
   }
 
-  removeTodo(todoList: TodoModel[], todoModel: TodoModel) {
-    todoList = todoList.filter(e => e.id != todoModel.id);
+  removeTodo(todoList: TodoModel[], id: string | number | undefined) {
+    todoList = todoList.filter(e => e.id != id);
     return todoList;
   }
 }
