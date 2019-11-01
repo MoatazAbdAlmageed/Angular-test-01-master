@@ -5,13 +5,16 @@ import {
   NextFunction
 } from "express";
 import { TodoModel } from "../model/todoModel";
+import { todos } from "./todos";
 
 export class TodoResource {
   public index: number = 1;
   public todoList: Array<TodoModel>;
 
   constructor(private contextRoot:string,private exp: Application) {
-    this.todoList = new Array();
+    this.todoList = todos;
+    this.index = this.todoList.length;
+    this.index++;
     this.initEndPoints(contextRoot,exp);
   }
 
@@ -23,12 +26,12 @@ export class TodoResource {
       this.todoList = this.addTodo(this.todoList, req.body,this.index++);
       res.send(this.todoList);
     });
-    exp.patch(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {
+    exp.patch(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {/*  */
       this.todoList = this.updateTodo(this.todoList, req.body);
       res.send(this.todoList);
     });
-    exp.delete(`/${contextRoot}/todo`, (req: Request, res: Response, next: NextFunction) => {
-      this.todoList = this.removeTodo(this.todoList, req.body);
+    exp.delete(`/${contextRoot}/todo/:id`, (req: Request, res: Response, next: NextFunction) => {
+      this.todoList = this.removeTodo(this.todoList, req.params.id);
       res.send(this.todoList);
     });
   }
@@ -38,7 +41,7 @@ export class TodoResource {
   }
 
   addTodo(todoList: TodoModel[], todoModel: TodoModel,index:number) {
-    todoModel.id = index++;
+  todoModel.id = index;
     todoModel.date = new Date();
     todoList.push(todoModel);
     return todoList;
@@ -54,8 +57,8 @@ export class TodoResource {
     return todoList;
   }
 
-  removeTodo(todoList: TodoModel[], todoModel: TodoModel) {
-    todoList = todoList.filter(e => e.id != todoModel.id);
+  removeTodo(todoList: TodoModel[], id: string | number | undefined) {
+    todoList = todoList.filter(e => e.id != id);
     return todoList;
   }
 }
