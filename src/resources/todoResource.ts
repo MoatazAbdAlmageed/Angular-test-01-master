@@ -13,6 +13,8 @@ export class TodoResource {
 
   constructor(private contextRoot:string,private exp: Application) {
     this.todoList = todos;
+    this.index = this.todoList.length;
+    this.index++;
     this.initEndPoints(contextRoot,exp);
   }
 
@@ -39,7 +41,7 @@ export class TodoResource {
   }
 
   addTodo(todoList: TodoModel[], todoModel: TodoModel,index:number) {
-    todoModel.id = todoList.length + 1
+  todoModel.id = index;
     todoModel.date = new Date();
     todoList.push(todoModel);
     return todoList;
